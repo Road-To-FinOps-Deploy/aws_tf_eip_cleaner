@@ -1,12 +1,12 @@
 resource "aws_iam_role" "iam_role_for_eip_cleanup" {
   name               = "${var.function_prefix}_role_for_eip_cleanup"
-  assume_role_policy = "${file("${path.module}/policies/LambdaAssume.pol")}"
+  assume_role_policy = file("${path.module}/policies/LambdaAssume.pol")
 }
 
 resource "aws_iam_role_policy" "iam_role_policy_for_eip_cleanup" {
   name   = "${var.function_prefix}_policy_for_eip_cleanup"
-  role   = "${aws_iam_role.iam_role_for_eip_cleanup.id}"
-  policy = "${file("${path.module}/policies/LambdaExecution.pol")}"
+  role   = aws_iam_role.iam_role_for_eip_cleanup.id
+  policy = file("${path.module}/policies/LambdaExecution.pol")
 }
 
 resource "aws_iam_policy" "owner_tag_policy" {
@@ -35,4 +35,6 @@ resource "aws_iam_policy" "owner_tag_policy" {
 ]
 }
 EOF
+
 }
+
